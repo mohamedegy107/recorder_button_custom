@@ -82,6 +82,8 @@ class SocialMediaRecorder extends StatefulWidget {
 
   final double initRecordPackageWidth;
 
+  final double? recordingWidgetWidth;
+
   // ignore: sort_constructors_first
   const SocialMediaRecorder({
     this.sendButtonIcon,
@@ -107,6 +109,7 @@ class SocialMediaRecorder extends StatefulWidget {
     this.encode = AudioEncoderType.AAC,
     this.cancelTextBackGroundColor,
     this.radius,
+    this.recordingWidgetWidth,
     Key? key,
   }) : super(key: key);
 
@@ -157,32 +160,30 @@ class _SocialMediaRecorder extends State<SocialMediaRecorder> {
   }
 
   Widget makeBody(SoundRecordNotifier state) {
-    return Column(
-      children: [
-        GestureDetector(
-          onHorizontalDragUpdate: (scrollEnd) {
-            state.updateScrollValue(scrollEnd.globalPosition, context);
-          },
-          onHorizontalDragEnd: (x) {
-            if (state.buttonPressed && !state.isLocked) state.finishRecording();
-          },
-          child: Container(
-            decoration: const BoxDecoration(
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(12),
-                topRight: Radius.circular(12),
-              ),
-            ),
-            child: recordVoice(state),
+    return GestureDetector(
+      onHorizontalDragUpdate: (scrollEnd) {
+        state.updateScrollValue(scrollEnd.globalPosition, context);
+      },
+      onHorizontalDragEnd: (x) {
+        if (state.buttonPressed && !state.isLocked) state.finishRecording();
+      },
+      child: Container(
+        decoration: const BoxDecoration(
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(12),
+            topRight: Radius.circular(12),
           ),
-        )
-      ],
+        ),
+        child: recordVoice(state),
+      ),
     );
   }
 
   Widget recordVoice(SoundRecordNotifier state) {
     if (state.lockScreenRecord == true) {
       return SoundRecorderWhenLockedDesign(
+        lockRecordingWidgetWidth: widget.recordingWidgetWidth ??
+            MediaQuery.of(context).size.width - 10,
         cancelText: widget.cancelText,
         fullRecordPackageHeight: widget.fullRecordPackageHeight,
         // cancelRecordFunction: widget.cacnelRecording ?? () {},
@@ -217,7 +218,8 @@ class _SocialMediaRecorder extends State<SocialMediaRecorder> {
         duration: Duration(milliseconds: soundRecordNotifier.isShow ? 0 : 300),
         height: widget.fullRecordPackageHeight,
         width: (soundRecordNotifier.isShow)
-            ? MediaQuery.of(context).size.width
+            ? widget.recordingWidgetWidth ??
+                MediaQuery.of(context).size.width - 10
             : widget.initRecordPackageWidth,
         child: Stack(
           children: [

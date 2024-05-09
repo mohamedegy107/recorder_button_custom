@@ -18,6 +18,7 @@ class SoundRecorderWhenLockedDesign extends StatelessWidget {
   final Color? counterBackGroundColor;
   final Color? cancelTextBackGroundColor;
   final Widget? sendButtonIcon;
+  final double lockRecordingWidgetWidth;
   // ignore: sort_constructors_first
   const SoundRecorderWhenLockedDesign({
     Key? key,
@@ -33,12 +34,13 @@ class SoundRecorderWhenLockedDesign extends StatelessWidget {
     required this.recordIconWhenLockBackGroundColor,
     required this.counterBackGroundColor,
     required this.cancelTextBackGroundColor,
+    required this.lockRecordingWidgetWidth,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: MediaQuery.of(context).size.width,
+      width: lockRecordingWidgetWidth,
       decoration: BoxDecoration(
         color: cancelTextBackGroundColor ?? Colors.grey.shade100,
         borderRadius: const BorderRadius.only(
