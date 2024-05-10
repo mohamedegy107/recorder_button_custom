@@ -108,6 +108,7 @@ class SoundRecordNotifier extends ChangeNotifier {
         String _time = minute.toString() + ":" + second.toString();
         sendRequestFunction(File.fromUri(Uri(path: path)), _time);
         stopRecording!(_time);
+        // mPath = '';
       }
     }
     resetEdgePadding();
@@ -196,7 +197,7 @@ class SoundRecordNotifier extends ChangeNotifier {
       try {
         RenderBox box = key.currentContext?.findRenderObject() as RenderBox;
         Offset position = box.localToGlobal(Offset.zero);
-        if (position.dx <= MediaQuery.of(context).size.width * 0.7) {
+        if (position.dx <= MediaQuery.of(context).size.width * 0.65) {
           String _time = minute.toString() + ":" + second.toString();
           if (stopRecording != null) stopRecording!(_time);
           resetEdgePadding();

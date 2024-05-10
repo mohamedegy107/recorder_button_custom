@@ -170,8 +170,10 @@ class _SocialMediaRecorder extends State<SocialMediaRecorder> {
             scrollEnd.globalPosition, context, widget.cacnelRecording ?? () {});
       },
       onHorizontalDragEnd: (x) {
-        widget.cacnelRecording != null ? widget.cacnelRecording!() : null;
-        if (state.buttonPressed && !state.isLocked) state.finishRecording();
+        if (!state.lockScreenRecord) {
+          widget.cacnelRecording != null ? widget.cacnelRecording!() : null;
+        }
+        // if (state.buttonPressed && !state.isLocked) state.finishRecording();
       },
       child: Container(
         decoration: const BoxDecoration(
@@ -192,7 +194,7 @@ class _SocialMediaRecorder extends State<SocialMediaRecorder> {
             MediaQuery.of(context).size.width - 10,
         cancelText: widget.cancelText,
         fullRecordPackageHeight: widget.fullRecordPackageHeight,
-        // cancelRecordFunction: widget.cacnelRecording ?? () {},
+        cancelRecordFunction: widget.cacnelRecording ?? () {},
         sendButtonIcon: widget.sendButtonIcon,
         cancelTextBackGroundColor: widget.cancelTextBackGroundColor,
         cancelTextStyle: widget.cancelTextStyle,
@@ -203,7 +205,7 @@ class _SocialMediaRecorder extends State<SocialMediaRecorder> {
         recordIconWhenLockedRecord: widget.recordIconWhenLockedRecord,
         sendRequestFunction: widget.sendRequestFunction,
         soundRecordNotifier: state,
-        stopRecording: widget.stopRecording,
+        stopRecordingFunction: widget.stopRecording,
       );
     }
 
