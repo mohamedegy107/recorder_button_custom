@@ -170,7 +170,8 @@ class SoundRecordNotifier extends ChangeNotifier {
   /// used to change the draggable to top value
   /// or To The X vertical
   /// and update this value in screen
-  updateScrollValue(Offset currentValue, BuildContext context) async {
+  updateScrollValue(Offset currentValue, BuildContext context,
+      Function() cacnelRecording) async {
     if (buttonPressed == true) {
       final x = currentValue;
 
@@ -195,10 +196,11 @@ class SoundRecordNotifier extends ChangeNotifier {
       try {
         RenderBox box = key.currentContext?.findRenderObject() as RenderBox;
         Offset position = box.localToGlobal(Offset.zero);
-        if (position.dx <= MediaQuery.of(context).size.width * 0.6) {
+        if (position.dx <= MediaQuery.of(context).size.width * 0.7) {
           String _time = minute.toString() + ":" + second.toString();
           if (stopRecording != null) stopRecording!(_time);
           resetEdgePadding();
+          cacnelRecording();
         } else if (x.dx >= MediaQuery.of(context).size.width) {
           edge = 0;
           edge = 0;

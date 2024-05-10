@@ -21,6 +21,9 @@ class SocialMediaRecorder extends StatefulWidget {
   /// function called when start recording
   final Function()? startRecording;
 
+  /// function called when start recording
+  final Function()? cacnelRecording;
+
   /// function called when stop recording, return the recording time (even if time < 1)
   final Function(String time)? stopRecording;
 
@@ -93,6 +96,7 @@ class SocialMediaRecorder extends StatefulWidget {
     this.storeSoundRecoringPath = "",
     required this.sendRequestFunction,
     this.startRecording,
+    this.cacnelRecording,
     this.stopRecording,
     this.recordIcon,
     this.lockButton,
@@ -162,9 +166,11 @@ class _SocialMediaRecorder extends State<SocialMediaRecorder> {
   Widget makeBody(SoundRecordNotifier state) {
     return GestureDetector(
       onHorizontalDragUpdate: (scrollEnd) {
-        state.updateScrollValue(scrollEnd.globalPosition, context);
+        state.updateScrollValue(
+            scrollEnd.globalPosition, context, widget.cacnelRecording ?? () {});
       },
       onHorizontalDragEnd: (x) {
+        widget.cacnelRecording != null ? widget.cacnelRecording!() : null;
         if (state.buttonPressed && !state.isLocked) state.finishRecording();
       },
       child: Container(

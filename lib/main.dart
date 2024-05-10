@@ -48,6 +48,7 @@ class _MyHomePageState extends State<MyHomePage> {
               startRecording: () {
                 // function called when start recording
               },
+              cacnelRecording: () {},
               stopRecording: (_time) {
                 // function called when stop recording, return the recording time
               },
