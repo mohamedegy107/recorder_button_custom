@@ -16,12 +16,14 @@ class ShowMicWithText extends StatelessWidget {
   final Color? counterBackGroundColor;
   final double fullRecordPackageHeight;
   final double initRecordPackageWidth;
+    final double recordMicIconSize;
 
   // ignore: sort_constructors_first
   ShowMicWithText({
     required this.backGroundColor,
     required this.initRecordPackageWidth,
     required this.fullRecordPackageHeight,
+    this.recordMicIconSize = 28,
     Key? key,
     required this.shouldShowText,
     required this.soundRecorderState,
@@ -72,7 +74,7 @@ class ShowMicWithText extends StatelessWidget {
                       child: recordIcon ??
                           Icon(
                             Icons.mic,
-                            size: 28,
+                            size: recordMicIconSize,
                             color: (soundRecorderState.buttonPressed)
                                 ? Colors.grey.shade200
                                 : Colors.black,

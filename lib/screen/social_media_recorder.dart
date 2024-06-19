@@ -87,11 +87,14 @@ class SocialMediaRecorder extends StatefulWidget {
 
   final double? recordingWidgetWidth;
 
+  final double recordMicIconSize;
+
   // ignore: sort_constructors_first
   const SocialMediaRecorder({
     this.sendButtonIcon,
     this.initRecordPackageWidth = 40,
     this.fullRecordPackageHeight = 50,
+    this.recordMicIconSize = 28,
     this.maxRecordTimeInSecond,
     this.storeSoundRecoringPath = "",
     required this.sendRequestFunction,
@@ -250,6 +253,7 @@ class _SocialMediaRecorder extends State<SocialMediaRecorder> {
                           initRecordPackageWidth: widget.initRecordPackageWidth,
                           counterBackGroundColor: widget.counterBackGroundColor,
                           backGroundColor: widget.recordIconBackGroundColor,
+                          recordMicIconSize: widget.recordMicIconSize,
                           fullRecordPackageHeight:
                               widget.fullRecordPackageHeight,
                           recordIcon: widget.recordIcon,
