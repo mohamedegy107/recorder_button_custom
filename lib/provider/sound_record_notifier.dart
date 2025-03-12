@@ -263,7 +263,7 @@ class SoundRecordNotifier extends ChangeNotifier {
       String recordFilePath = await getFilePath();
       _timer = Timer(const Duration(milliseconds: 900), () {
         recordMp3.start(
-          const RecordConfig(encoder: AudioEncoder.pcm16bits),
+          const RecordConfig(),
           path: recordFilePath,
         );
       });
