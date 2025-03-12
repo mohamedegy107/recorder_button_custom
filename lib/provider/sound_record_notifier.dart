@@ -251,7 +251,7 @@ class SoundRecordNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
-  /// this function to start record voice
+   /// this function to start record voice
   record(Function()? startRecord) async {
     if (!_isAcceptedPermission) {
       await Permission.microphone.request();
@@ -261,11 +261,11 @@ class SoundRecordNotifier extends ChangeNotifier {
     } else {
       buttonPressed = true;
       String recordFilePath = await getFilePath();
-      _timer = Timer(const Duration(milliseconds: 900), () {
-        recordMp3.start(
-          const RecordConfig(),
-          path: recordFilePath,
-        );
+      if (_timer != null) {
+        _timer?.cancel();
+      }
+      _timer = Timer(const Duration(milliseconds: 400), () {
+        recordMp3.start(const RecordConfig(), path: recordFilePath);
       });
 
       if (startRecord != null) {
